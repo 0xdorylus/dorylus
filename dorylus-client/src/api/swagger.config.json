@@ -1,0 +1,4 @@
+{
+  "docsUrl": "https://api.dorylus.ai/openapi.json",
+  "axiosInstanceUrl": "@/utils/request.ts"
+}

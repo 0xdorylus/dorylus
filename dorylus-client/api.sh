@@ -1,0 +1,1 @@
+zerone api -js -p ./src/api

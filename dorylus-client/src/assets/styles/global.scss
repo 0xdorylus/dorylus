@@ -1,0 +1,34 @@
+html,
+body,
+#app {
+  height: 100%;
+}
+* {
+  box-sizing: border-box;
+}
+#app {
+  font-family: 'Montserrat', sans-serif !important;
+}
+// 手机端抽屉菜单
+.popup-dialog {
+  width: 60% !important;
+  .el-drawer__body {
+    padding: 10px;
+  }
+}
+
+// 右键菜单
+.mx-context-menu-item {
+  font-family: 'Montserrat', sans-serif;
+  padding: 12px 15px !important;
+  cursor: pointer;
+  &:hover {
+    border-radius: 10px !important;
+  }
+}
+.mx-context-menu {
+  padding: 0 !important;
+}
+.el-button {
+  font-family: 'Montserrat', sans-serif !important;
+}
