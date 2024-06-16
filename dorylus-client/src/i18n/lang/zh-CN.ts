@@ -161,7 +161,8 @@ export default {
   home_url:"官网链接",
   register_bot:"注册Agent",
 
-
+  begin_deal_url:"处理文件",
+  
 
 
 

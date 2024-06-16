@@ -220,7 +220,7 @@ export class BotService {
   }
 
   static async dealUrl(params: {} | undefined = {}) {
-    return request("/apis/AI/Api/Index/dealUrl", params, "post");
+    return request("/apis/agent/deal_kb_url", params, "post");
   }
 
   static async registerAgent(params: {} | undefined = {}) {

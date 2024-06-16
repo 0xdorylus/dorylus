@@ -100,16 +100,6 @@
 
 
 
-       
-<!--               
-        <div class="mb-2 flex items-center text-sm">
-
-                <el-radio-group v-model="llm">
-                  <el-radio value="gpt-3.5">GPT-3.5</el-radio>
-                  <el-radio value="GTP4.0">GPT-4.0</el-radio>
-                  <el-radio value="lama3-8b">Lama3-8B</el-radio>
-                </el-radio-group>
-            </div> -->
 
 
 
@@ -156,9 +146,9 @@
                 <el-input type="textarea" :rows="5" :placeholder='$t("url_source_desc")' />
               </el-form-item> -->
 
-              <el-upload  :accept="pdf"  class="upload-demo" drag
+              <el-upload   class="upload-kb" drag
                 :headers="customHeaders"
-                :on-success="handleImageUploadSuccess" action="https://api.dorylus.ai/private_upload"
+                :on-success="handleKnowledgeUploadSuccess" action="https://api.dorylus.ai/private_upload"
                 :show-file-list="true"
                 multiple>
                 <el-icon class="el-icon--upload"><upload-filled /></el-icon>
@@ -175,8 +165,8 @@
 
               <el-button type="primary" size="small" @click="dealUrl()">{{ $t('begin_deal_url')
               }}</el-button>
-              <el-button type="primary" size="small" @click="upload()">{{ $t('begin_upload')
-              }}</el-button>
+              <!-- <el-button type="primary" size="small" @click="upload()">{{ $t('begin_upload')
+              }}</el-button> -->
 
             </el-card>
           </el-col>
@@ -218,6 +208,7 @@ const customHeaders = {
   "x-auth": authStore.token
 }
 
+const kbFiles = ref([])
 const llm = ref("gpt-3.5")
 
 
@@ -259,7 +250,16 @@ const toggleBotVisiablity = async (agent_id: string) => {
 
 }
 const dealUrl = async () => {
-
+  let ret = await BotService.dealUrl({
+    id:agent_id,
+    urls:kbFiles.value,
+  });
+  console.log(ret)
+  if (ret.code === 0) {
+    ElMessage.success(  t("success"))
+  } else {
+    ElMessage.success(  t("fail"))
+  }
 }
 const upload = async () => {
 
@@ -284,7 +284,7 @@ const handleKnowledgeUploadSuccess = (response:any, file:any, fileList:any) => {
 
   // 假设服务器返回的响应数据中包含图片地址字段 imageUrl
   console.log(response)
-  copilot.value.avatar = response.result.url;
+  kbFiles.value.push(response.result.url);
 }
 
 

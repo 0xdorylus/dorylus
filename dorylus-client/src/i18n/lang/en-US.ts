@@ -133,6 +133,7 @@ export default {
 
      home_url:"Home Url",
      register_bot: "Register Agent",
+     begin_deal_url:"Deal Files",
 
 
 
