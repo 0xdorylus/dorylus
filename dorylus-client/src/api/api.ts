@@ -226,6 +226,15 @@ export class BotService {
   static async registerAgent(params: {} | undefined = {}) {
     return request("/apis/agent/register_agent", params, "post");
   }
+
+  static async chat(params: {} | undefined = {}) {
+    return request("/apis/agent/chat", params, "post");
+  }
+  static async audio_chat(params: {} | undefined = {}) {
+    return request("/apis/agent/audio_chat", params, "post");
+  }
+  
+
 }
 
 

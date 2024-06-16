@@ -148,7 +148,7 @@ import { useAuthStore } from '@/store/common'
 import { useWebSocket } from '@vueuse/core'
 import { getWssUrl} from "@/utils/config"
 import { handleCopy} from "@/utils/common"
-
+import defaultLogo from '@/assets/images/small_bot.png'
 interface ChatListFace {
      _id: number
      title: string
@@ -338,9 +338,9 @@ onMounted(async () => {
           }catch(e){}
      }
 
-     await initConversationId(assistantId)
-     await fetchHistoryData()
-     getChatList()
+     // await initConversationId(assistantId)
+     // await fetchHistoryData()
+     // getChatList()
 });
 
 const getChatList = async () => {
@@ -445,8 +445,19 @@ const handleSendMsg = async () => {
           })
 
           //临时
-          let ret = await BotService.sendMsg({ msg: sendValue.value, assistant_id: assistantId, conversation_id: conversationId.value });
+          let ret = await BotService.chat({ msg: sendValue.value, agent_id: assistantId, conversation_id: "" });
           console.log(ret);
+          if(ret.code == 0) {
+               recordData.value.push({
+               id: recordData.value.length + 1,
+               uid: currentUser.uid,
+               avatar: defaultLogo,
+               person: 1,
+               content: ret.result.answer,
+               time: getNowTimes("YYYY-mm-dd HH:MM:SS") as string
+               })
+          }
+
 
           nextTick(() => {
                scrollbarRef.value!.setScrollTop(height.value)
